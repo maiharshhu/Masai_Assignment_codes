@@ -20,5 +20,6 @@ for (let i = 0; i < length; i++) {
 }
 
 // Print results
+console.log(studentScores);
 console.log("Number of passing students:", passCount);
 console.log("Updated Scores:", studentScores);

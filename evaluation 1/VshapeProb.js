@@ -29,30 +29,29 @@
 //      V    
 
 function generateV(input) {
-    let result = ''; // This will store the final "V" shape.
+    let result = '';
 
-    // Loop through each row except the last one
     for (let i = 0; i < input - 1; i++) {
-        // Add spaces before the backslash (\)
-        result += ' '.repeat(i);
+        let leftSpaces = '';
+        for (let j = 0; j < i; j++) {
+            leftSpaces += ' ';
+        }
 
-        // Add backslash (\)
-        result += '\\';
+        let middleSpaces = '';
+        let spacesCount = 2 * (input - i - 1) - 1;
+        for (let k = 0; k < spacesCount; k++) {
+            middleSpaces += ' ';
+        }
 
-        // Add spaces between backslash and forward slash
-        result += ' '.repeat(2 * (input - i - 1) - 1);
-
-        // Add forward slash (/)
-        result += '/';
-
-        // Add a newline after each row
-        result += '\n';
+        result += leftSpaces + '\\' + middleSpaces + '/' + '\n';
     }
 
-    // Add the last row which only contains a "V"
-    result += ' '.repeat(input - 1) + 'V' + '\n';
+    let finalSpaces = '';
+    for (let j = 0; j < input - 1; j++) {
+        finalSpaces += ' ';
+    }
+    result += finalSpaces + 'V';
 
-    // Output the final result
     console.log(result);
 }
 

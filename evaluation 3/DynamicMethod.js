@@ -2,25 +2,32 @@ sentenceBuilder = {
     subject: "I",
     verb: "am",
     object: "coding",
-    buildSentence: function (subject, verb, object) {
+    buildSentence: function () {
         let checker = this.subject && this.verb && this.object
             ? this.subject + " " + this.verb + " " + this.object
             : "Incomplete Sentence!";
         return checker;
     },
     updateProperty: function (property, value) {
-        return this.hasOwnProperty(property) ? this[property] = value : "Invalid Property!";
+        const allowedProperties = ["subject", "verb", "object"];
+        if (allowedProperties.includes(property)) {
+            this[property] = value;
+            return `Updated ${property} to "${value}"`;
+        }
+        else {
+            return `Invalid property: "${property}"`;
+        }
 
-    },
-}
+    }
+};
+Object.seal(sentenceBuilder);
 
 console.log(sentenceBuilder.buildSentence());
-sentenceBuilder.updateProperty("verb", "am learning");
+// console.log(sentenceBuilder.buildSentence());
+sentenceBuilder.updateProperty("obdddt", "JavaScript");
 console.log(sentenceBuilder.buildSentence());
-sentenceBuilder.updateProperty("object", "JavaScript");
-console.log(sentenceBuilder.buildSentence());
-sentenceBuilder.updateProperty("subject", "Yes I");
-console.log(sentenceBuilder.buildSentence());
-sentenceBuilder.updateProperty();
-console.log(sentenceBuilder.buildSentence());
+// sentenceBuilder.updateProperty("subject", "Yes I");
+// console.log(sentenceBuilder.buildSentence());
+// sentenceBuilder.updateProperty();
+// console.log(sentenceBuilder.buildSentence());
 
