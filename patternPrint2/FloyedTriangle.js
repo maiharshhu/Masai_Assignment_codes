@@ -9,4 +9,4 @@ function floyed(n){
         console.log(row)
     }
 }
-floyed(4)
+floyed(6)
