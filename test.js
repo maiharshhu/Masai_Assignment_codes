@@ -1,24 +1,20 @@
-function calculateDiscount(price, discount = 10) {
-    let discountAmount = (price * discount) / 100;
-    let finalPrice = price - discountAmount;
-    console.log(finalPrice);
+function  faultyDirection(n,str) {
+    // Write code here
+    let x = 0;
+    let y = 0;
+    for(let i=0; i<n; i++){
+      if(str[i]=="L"){
+        x-=1;
+      }
+      else if(str[i]=="R"){
+        x+=1;
+      }
+      else if(str[i]=="U"){
+        y+=1;
+      }
+      else if(str[i]=="D"){
+        y-=1;
+        }
+        return {x, y};
+    }
 }
-let price = 450;
-let discount;
-// let price = 450; // Example price
-// let discount; // Example discount percentage
-
-if (isNaN(price) || price < 0) {
-    console.log("Invalid price. Please enter a positive number.");
-}
-else if (discount === undefined || discount === 0) {
-    calculateDiscount(price)
-}
-else if (discount == "" || price == "") {
-    console.log("Discount and price should be a number.");
-}
-
-else {
-    calculateDiscount(price, discount);
-}
-
