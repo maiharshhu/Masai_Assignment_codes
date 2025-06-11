@@ -22,9 +22,11 @@ fetch("https://fakestoreapi.com/products");
 
     const averageRating = (totalRating/filterProducts.length);
 
-    console.log("filtered products.toEach(p => console.log(p))")
+    mappedProducts.forEach(p => console.log(p));
 
-    console.log("Average Rating of filtered products ${averageRating}")
+    console.log(`Sorted Products: ${JSON.stringify(sortedProducts)}`);
+    
+    console.log(`Average Rating of filtered products ${averageRating}`);
 
  }catch(error){
     console.log("Error fetching products",) 
