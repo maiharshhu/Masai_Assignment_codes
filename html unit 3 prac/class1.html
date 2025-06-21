@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       div#box{
+        width:80%;
+        height: 80vh;
+        background: yellow;
+       }
+       div#box>div:nth-last-of-type(1){
+        background-color: red;
+        grid-area: q1;
+       }
+       div#box>div:nth-last-of-type(2){
+        background-color: aqua;
+        grid-area: q2;
+       }
+       div#box>div:nth-last-of-type(3){
+        background-color: greenyellow;
+        grid-area: q3;
+        }
+       div#box>div:nth-last-of-type(4){
+        background-color: lightcoral;
+        grid-area: q4;
+    }
+    @media (width<=750px) {
+        
+    }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- <section></section> -->
+
+        <div id="box">
+            <div>1</div>
+            <div>6</div>
+            <div>5</div>
+            <div>4</div>
+        </div>
+    </main>
+</body>
+</html>
