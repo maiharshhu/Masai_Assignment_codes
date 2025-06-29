@@ -1,0 +1,3 @@
+const myObj = {
+//     name:"multiply"
+// };

@@ -1,11 +1,8 @@
-function outerFunction() {
-  const message = "Hello from closure!";
+let freq = {};
+let str = "aabcc";  // fixed variable name
 
-  return function innerFunction() {
-    console.log(message);
-  };
+for (let ch of str) {  // use 'ch' to refer to each character
+  freq[ch] = (freq[ch] || 0) + 1;
 }
 
-
-const greet = outerFunction();
-greet(); 
+console.log(freq);
