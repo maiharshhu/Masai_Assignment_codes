@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
-    <script src="test2.js"></script>
-</body>
+    <form action="">
+        <div>
+            <label for="name">Enter Name:d</label>
+            <input type="text", id="name" required>
+        </div>
+        <div>
+            <label for="email">Enter Email</label>
+            <input type="email", id="email" required>
+        </div>
+        <div>
+            <label for="pass">Enter Password</label>
+            <input type="password", id="pass" required>
+        </div>
+        <div>
+            <label for="dt">Enter Name:d</label>
+            <input type="date", id="dt" required>
+        </div>
+        <div>
+            <label for="dp">Enter Dept</label>
+            <input type="text", id="dp" required>
+        </div>
+        <fieldset>
+  <legend>Select a gender:</legend>
 
+  <div>
+    <input type="radio" id="male" name="drone" value="huey" checked />
+    <label for="male">male</label>
+  </div>
+
+  <div>
+    <input type="radio" id="female" name="drone" value="dewey" />
+    <label for="female">female</label>
+  </div>
+
+  <div>
+    <input type="radio" id="Other" name="drone" value="louie" />
+    <label for="Other">Other</label>
+  </div>
+</fieldset>
+<button type="submit">Save</button>
+    </form>
+</body>
 </html>
