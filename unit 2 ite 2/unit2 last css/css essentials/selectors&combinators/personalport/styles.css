@@ -1,0 +1,96 @@
+body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+        }
+        header, footer {
+            background: #ff6f4d;
+            color: #222;
+            text-align: center;
+            padding: 20px 0 10px 0;
+        }
+        header h1 {
+            margin: 0;
+            color: #222;
+        }
+        nav {
+            margin-top: 5px;
+        }
+        nav a {
+            color: #222;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        main {
+            max-width: 90vw;
+            margin: 30px auto;
+        }
+        section {
+            margin-bottom: 30px;
+            background: #fff;
+        }
+        .about, .projects, .contact {
+            padding: 10px 20px;
+        }
+        .about img {
+            width: 40px;
+            display: block;
+            margin: 10px 0;
+        }
+        .project-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .project {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+        .project:last-child {
+            border-bottom: none;
+        }
+        .project-title {
+            font-weight: bold;
+        }
+        .project-links a {
+            color: #0074d9;
+            text-decoration: underline;
+            margin-right: 10px;
+        }
+        .project-details ul {
+            margin: 5px 0 0 20px;
+        }
+        .contact-form label {
+            display: block;
+            margin: 8px 0 2px 0;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 200px;
+            padding: 4px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+        }
+        .contact-form textarea {
+            height: 40px;
+            resize: vertical;
+        }
+        .contact-form button {
+            padding: 5px 15px;
+            background: #ff6f4d;
+            color: #222;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            padding: 15px 0 10px 0;
+        }
+        footer a {
+            color: #222;
+            text-decoration: underline;
+        }

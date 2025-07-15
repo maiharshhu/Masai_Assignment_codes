@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Specificity Example</title>
+  <style>
+    /* Element selector */
+    div {
+      color: green;
+    }
+    /* Class selector */
+    .highlight {
+      color: blue;
+    }
+    /* ID selector */
+    #special {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="highlight" id="special">
+    This div has class "highlight" and id "special".
+  </div>
+  <p>
+    The text above is <b>red</b> because the ID selector <code>#special</code> has higher specificity than the class or element</p>
+</body>
+</html>
