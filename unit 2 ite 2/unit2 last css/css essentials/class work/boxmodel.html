@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#box{
+            width: 400px;
+            height: 400px;
+            background-color: yellow;
+            margin: auto;
+        }
+        div#box>div{
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            border-radius: 50%;
+            position: absolute;
+        }
+        div#box>div:first-child{
+            left:40%;
+            top:30%;
+        }
+        div#box>div:nth-of-type(2){
+            left:40%;
+            bottom:0;
+        }
+        div#box>div:nth-of-type(3){
+            right:0;
+            top:40%;
+        }
+        div#box>div:nth-of-type(4){
+            right:0%;
+            bottom:40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
