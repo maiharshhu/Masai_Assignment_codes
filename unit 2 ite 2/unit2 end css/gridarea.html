@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid template area</title>
+    <style>
+        div#box{
+            width: 90%;
+            height: 50vh;
+            display: grid;
+            grid-template-areas: q1 q2 q3 q4;
+        }
+        div#box>div:nth-of-type(1){
+            color: green
+            grid: q 1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+</body>
+</html>

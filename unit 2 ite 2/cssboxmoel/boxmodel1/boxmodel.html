@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Box Model Demo</title>
+  <style>
+    .container {
+      width: 90%;
+      margin: 20px auto;
+    }
+
+    .box {
+      margin: 20px;
+      padding: 20px;
+      border: 5px solid black;
+      font-size: 18px;
+      color: white;
+    }
+
+    .content-box {
+      background-color: #3498db;
+      width: 300px;
+      box-sizing: content-box;
+    }
+
+    .border-box {
+      background-color: #e67e22;
+      width: 300px;
+      box-sizing: border-box;
+    }
+
+    .default-box {
+      background-color: #2ecc71;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box content-box">
+      <strong>Box 1:</strong> box-sizing: <code>content-box</code><br>
+      Width = 300px only for content. Border and padding added outside.
+    </div>
+
+    <div class="box border-box">
+      <strong>Box 2:</strong> box-sizing: <code>border-box</code><br>
+      Width = 300px includes content + padding + border.
+    </div>
+
+    <div class="box default-box">
+      <strong>Box 3:</strong> Default box (content-box)<br>
+      No box-sizing mentioned. Acts like content-box by default.
+    </div>
+  </div>
+</body>
+</html>

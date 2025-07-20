@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Display Demo</title>
+  <style>
+    .container {
+      margin: 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .box {
+      padding: 10px;
+      margin: 10px;
+      border: 2px solid black;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .block-box {
+      display: block;
+      background-color: #f39c12;
+    }
+
+    .inline-box {
+      display: inline;
+      background-color: #27ae60;
+    }
+
+    .inline-block-box {
+      display: inline-block;
+      width: 120px;
+      background-color: #9b59b6;
+    }
+
+    .none-box {
+      display: none;
+      background-color: #e74c3c;
+    }
+
+    .note {
+      font-style: italic;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>CSS Display Property Examples.</h2>
+
+    <div class="box block-box">Display: block</div>
+
+    <div class="box inline-box">Display: inline</div>
+    <div class="box inline-box">Inline element 2</div>
+
+    <div class="box inline-block-box">Display: inline-block</div>
+    <div class="box inline-block-box">Box 2</div>
+
+    <div class="box none-box">Display: none</div>
+
+    <div class="note">The red box with <code>display: none</code> is hidden and not rendered in the layout.</div>
+  </div>
+</body>
+</html>
