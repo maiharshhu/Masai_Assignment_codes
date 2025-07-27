@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #hd1 {
+        color: red;
+      }
+      p {
+        color: brown;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        background-color: green;
+        border: solid pink 3px;
+        border-radius: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="hd1">This is heading 1</h1>
+    <p id="ptag">This is paragraph</p>
+    <div class="container">
+      <h3>Hello this is inside div</h3>
+    </div>
+  </body>
+</html>
+
+<script>
+  document.getElementById("hd1").innerText = "welcome to dom world";
+  const para = document.getElementsByTagName("p");
+  for (const p of para) {
+    p.style.color = "blue";
+  }
+  let divmod = document.querySelector("div");
+  divmod.style.backgroundColor = "Yellow";
+</script>

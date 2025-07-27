@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DOM Traversal</title>
+  </head>
+  <body>
+    <div id="container">
+      <ul id="list">
+        <li id="item1">Item 1</li>
+        <li id="item2">Item 2</li>
+        <li id="item3">Item 3</li>
+      </ul>
+    </div>
+
+    <script>
+      const item2 = document.getElementById("item2");
+
+      item2.addEventListener("click", function () {
+        // Show parent node's text content in alert
+        const parentUL = item2.parentNode;
+        alert("Parent UL text content:\n" + parentUL.textContent.trim());
+
+        // Log previous and next siblings
+        const prev = item2.previousElementSibling;
+        const next = item2.nextElementSibling;
+
+        if (prev) {
+          console.log("Previous Sibling:", prev.textContent);
+        } else {
+          console.log("No previous sibling.");
+        }
+
+        if (next) {
+          console.log("Next Sibling:", next.textContent);
+        } else {
+          console.log("No next sibling.");
+        }
+      });
+    </script>
+  </body>
+</html>

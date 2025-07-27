@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Event Propagation Demo</title>
+    <style>
+      .box {
+        padding: 30px;
+        margin: 10px;
+        border: 2px solid black;
+      }
+
+      #outer {
+        background-color: lightblue;
+      }
+
+      #middle {
+        background-color: lightgreen;
+      }
+
+      #inner {
+        background-color: lightpink;
+      }
+
+      button {
+        display: block;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="outer" class="box">
+      Outer Div
+      <button id="outerBtn">Outer Button</button>
+
+      <div id="middle" class="box">
+        Middle Div
+        <button id="middleBtn">Middle Button</button>
+
+        <div id="inner" class="box">
+          Inner Div
+          <button id="innerBtn">Inner Button</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Utility to attach listeners in both phases
+      function addBothPhaseListeners(element, name) {
+        // Capturing phase
+        element.addEventListener(
+          "click",
+          function (e) {
+            alert("Capturing: " + name);
+          },
+          true
+        );
+
+        // Bubbling phase
+        element.addEventListener("click", function (e) {
+          alert("Bubbling: " + name);
+        });
+      }
+
+      // Add listeners to divs
+      addBothPhaseListeners(document.getElementById("outer"), "Outer Div");
+      addBothPhaseListeners(document.getElementById("middle"), "Middle Div");
+      addBothPhaseListeners(document.getElementById("inner"), "Inner Div");
+
+      // Add listeners to buttons
+      addBothPhaseListeners(
+        document.getElementById("outerBtn"),
+        "Outer Button"
+      );
+      addBothPhaseListeners(
+        document.getElementById("middleBtn"),
+        "Middle Button"
+      );
+
+      // Inner button listener with stopPropagation
+      const innerBtn = document.getElementById("innerBtn");
+
+      // Capturing phase
+      innerBtn.addEventListener(
+        "click",
+        function (e) {
+          alert("Capturing: Inner Button");
+        },
+        true
+      );
+
+      // Bubbling phase + stop propagation
+      innerBtn.addEventListener("click", function (e) {
+        alert("Bubbling: Inner Button");
+        e.stopPropagation(); // 🔥 Prevents event from bubbling up
+      });
+    </script>
+  </body>
+</html>

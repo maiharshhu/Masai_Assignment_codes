@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Dom Manipulation</title>
+    <style>
+      #divup {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid tomato;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="clr" placeholder="Enter color.." />
+
+    <input type="text" id="txt" placeholder="Enter Text..." />
+
+    <button onclick="bgdiv()">Change Background</button>
+
+    <button onclick="uptxt()">Update Text</button>
+
+    <div id="divup">This is some initial text content;</div>
+  </body>
+</html>
+
+<script>
+  function isValidcolor(color) {
+    const s = new Option().style;
+    s.color = color;
+    return s.color !== "";
+  }
+
+  function bgdiv() {
+    const colorInput = document.getElementById("clr").value.trim();
+    let div = document.getElementById("divup");
+
+    if (isValidcolor(colorInput)) {
+      div.style.backgroundColor = colorInput;
+    } else {
+      alert("Invalid color name!");
+    }
+  }
+
+  function uptxt() {
+    const textInput = document.getElementById("txt").value.trim();
+    const div = document.getElementById("divup");
+
+    if (textInput) {
+      div.textContent = textInput;
+    } else {
+      alert("Please Enter some text!");
+    }
+  }
+</script>

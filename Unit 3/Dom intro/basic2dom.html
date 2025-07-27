@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul></ul>
+    <button onclick="addItem()">Add items</button>
+  </body>
+</html>
+
+<script>
+  function addItem() {
+    const ulele = document.querySelector("ul");
+    const newItem = document.createElement("li");
+    newItem.textContent = "Dynamically added item";
+
+    // Get how many items are already in the list
+    const itemCount = ulele.children.length + 1;
+
+    newItem.textContent = `Item ${itemCount}`;
+
+    // Apply styles based on whether itemCount is odd or even
+    if (itemCount % 2 === 1) {
+      // Odd-numbered item
+      newItem.style.color = "blue";
+      newItem.style.fontWeight = "bold";
+    } else {
+      // Even-numbered item
+      newItem.style.color = "red";
+      newItem.style.fontStyle = "italic";
+    }
+
+    // Append the new item to the list
+    ulele.appendChild(newItem);
+  }
+</script>
