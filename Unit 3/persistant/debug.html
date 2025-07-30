@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User Preferences</title>
+  </head>
+  <body>
+    <form id="preferencesForm">
+      <label for="theme">Theme:</label>
+      <select id="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+
+      <br />
+
+      <label for="language">Language:</label>
+      <select id="language">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+      </select>
+
+      <br />
+
+      <label for="notifications">Notifications:</label>
+      <input type="checkbox" id="notifications" />
+
+      <br /><br />
+
+      <button type="submit">Save Preferences</button>
+    </form>
+
+    <script>
+      const form = document.getElementById("preferencesForm");
+      const themeSelect = document.getElementById("theme");
+      const languageSelect = document.getElementById("language");
+      const notificationsCheckbox = document.getElementById("notifications");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const preferences = {
+          theme: themeSelect.value,
+          language: languageSelect.value,
+          notifications: notificationsCheckbox.checked,
+        };
+
+        localStorage.setItem("preferences", JSON.stringify(preferences));
+        alert("Preferences Saved!");
+      });
+
+      window.onload = () => {
+        const savedPreferences = localStorage.getItem("preferences");
+        if (savedPreferences) {
+          const preferences = JSON.parse(savedPreferences);
+
+          if (preferences.theme) themeSelect.value = preferences.theme;
+          if (preferences.language) languageSelect.value = preferences.language;
+          if (typeof preferences.notifications === "boolean") {
+            notificationsCheckbox.checked = preferences.notifications;
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

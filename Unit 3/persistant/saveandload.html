@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Save and Load User Notes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 30px;
+      }
+      textarea {
+        width: 100%;
+        height: 120px;
+        margin-bottom: 10px;
+      }
+      button {
+        margin: 5px;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>User Notes</h2>
+    <textarea id="notes" placeholder="Enter your notes here..."></textarea>
+    <br />
+    <button id="saveBtn">Save Notes</button>
+    <button id="loadBtn">Load Notes</button>
+    <button id="clearBtn">Clear Notes</button>
+    <div id="error" class="error"></div>
+
+    <script>
+      const notesArea = document.getElementById("notes");
+      const saveBtn = document.getElementById("saveBtn");
+      const loadBtn = document.getElementById("loadBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const errorDiv = document.getElementById("error");
+
+      // Load notes on page load
+      window.onload = function () {
+        const savedNotes = localStorage.getItem("userNotes");
+        if (savedNotes) {
+          notesArea.value = savedNotes;
+        }
+      };
+
+      // Save notes
+      saveBtn.onclick = function () {
+        const notes = notesArea.value.trim();
+        if (!notes) {
+          errorDiv.textContent = "Cannot save empty notes!";
+          return;
+        }
+        localStorage.setItem("userNotes", notes);
+        errorDiv.textContent = "Notes saved!";
+        setTimeout(() => (errorDiv.textContent = ""), 1500);
+      };
+
+      // Load notes
+      loadBtn.onclick = function () {
+        const savedNotes = localStorage.getItem("userNotes");
+        if (savedNotes) {
+          notesArea.value = savedNotes;
+          errorDiv.textContent = "Notes loaded!";
+          setTimeout(() => (errorDiv.textContent = ""), 1500);
+        } else {
+          errorDiv.textContent = "No saved notes found.";
+          setTimeout(() => (errorDiv.textContent = ""), 1500);
+        }
+      };
+
+      // Clear notes
+      clearBtn.onclick = function () {
+        localStorage.removeItem("userNotes");
+        notesArea.value = "";
+        errorDiv.textContent = "Notes cleared!";
+        setTimeout(() => (errorDiv.textContent = ""), 1500);
+      };
+    </script>
+  </body>
+</html>
