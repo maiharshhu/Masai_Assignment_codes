@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <form id="weatherForm">
+      <input type="text" id="city" placeholder="Enter city name" required />
+      <button type="submit">Get Weather</button>
+    </form>
+    <div id="weather"></div>
+
+    <script>
+      const weatherForm = document.getElementById("weatherForm");
+      const cityInput = document.getElementById("city");
+      const weatherDisplay = document.getElementById("weather");
+
+      weatherForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const city = cityInput.value.trim();
+        if (city) {
+          fetchWeather(city);
+        } else {
+          weatherDisplay.textContent = "Please enter a city name.";
+        }
+      });
+
+      async function fetchWeather(city) {
+        const apiKey = "YOUR_API_KEY";
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error("City not found");
+          }
+          const data = await response.json();
+          weatherDisplay.textContent = `Temperature in ${city}: ${data.main.temp}°C`;
+        } catch (error) {
+          weatherDisplay.textContent =
+            "Failed to fetch weather. " + error.message;
+        }
+      }
+    </script>
+  </body>
+</html>

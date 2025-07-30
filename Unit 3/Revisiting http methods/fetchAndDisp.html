@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch and Display</title>
+  </head>
+  <body>
+    <h1>UserNames:</h1>
+    <ul></ul>
+  </body>
+</html>
+<script>
+  fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      data.forEach((user) => {
+        const markup = `<li>${user.name}</li>`;
+
+        document.querySelector("ul").insertAdjacentHTML("beforeEnd", markup);
+      });
+    })
+    .catch((error) => console.log(error));
+</script>

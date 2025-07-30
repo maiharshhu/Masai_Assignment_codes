@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Post</title>
+  </head>
+  <body>
+    <form id="postForm">
+      <input type="text" id="title" placeholder="Title" />
+      <input type="text" id="body" placeholder="Body" />
+      <button type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+      // Step 1: Get form and response div
+      const form = document.getElementById('postForm');
+      const responseDiv = document.getElementById('response');
+
+      // Step 2: Listen for form submit
+      form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent page reload
+
+        // Step 3: Get values and validate
+        const title = document.getElementById('title').value.trim();
+        const body = document.getElementById('body').value.trim();
+
+        if (!title || !body) {
+          responseDiv.textContent = "Both Title and Body are required!";
+          return;
+        }
+
+        // Step 4: Send POST request
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ title, body })
+        })
+        .then(res => res.json())
+        .then(data => {
+          // Step 5: Display response
+          responseDiv.innerHTML = `
+            <h3>Post Created!</h3>
+            <p><strong>ID:</strong> ${data.id}</p>
+            <p><strong>Title:</strong> ${data.title}</p>
+            <p><strong>Body:</strong> ${data.body}</p>
+          `;
+        })
+        .catch(err => {
+          responseDiv.textContent = "Error creating post!";
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Search & Filter</title>
+    <style>
+      .controls {
+        margin-bottom: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        border: 1px solid #ccc;
+        padding: 16px;
+        border-radius: 8px;
+        text-align: center;
+        background: #fafafa;
+      }
+      .card img {
+        max-width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Product Search & Filter</h2>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search by title" />
+      <select id="category">
+        <option value="">All Categories</option>
+      </select>
+      <select id="sort">
+        <option value="asc">Sort by Price: Low to High</option>
+        <option value="desc">Sort by Price: High to Low</option>
+      </select>
+    </div>
+    <div id="products"></div>
+    <div id="error" style="color: red"></div>
+
+    <script>
+      let allProducts = [];
+      let categories = [];
+
+      // Fetch categories for dropdown
+      async function fetchCategories() {
+        try {
+          const res = await fetch(
+            "https://fakestoreapi.com/products/categories"
+          );
+          categories = await res.json();
+          const categorySelect = document.getElementById("category");
+          categories.forEach((cat) => {
+            const option = document.createElement("option");
+            option.value = cat;
+            option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+            categorySelect.appendChild(option);
+          });
+        } catch (err) {
+          document.getElementById("error").textContent =
+            "Failed to fetch categories.";
+        }
+      }
+
+      // Fetch products
+      async function fetchProducts() {
+        try {
+          const res = await fetch("https://fakestoreapi.com/products");
+          allProducts = await res.json();
+          renderProducts(allProducts);
+        } catch (err) {
+          document.getElementById("error").textContent =
+            "Failed to fetch products.";
+        }
+      }
+
+      // Render products
+      function renderProducts(products) {
+        const productsDiv = document.getElementById("products");
+        if (products.length === 0) {
+          productsDiv.innerHTML = "<p>No products found.</p>";
+          return;
+        }
+        productsDiv.innerHTML = `<div class="grid">
+        ${products
+          .map(
+            (product) => `
+          <div class="card">
+            <img src="${product.image}" alt="${product.title}" />
+            <h4>${product.title}</h4>
+            <p><strong>Category:</strong> ${product.category}</p>
+            <p><strong>Price:</strong> $${product.price}</p>
+          </div>
+        `
+          )
+          .join("")}
+      </div>`;
+      }
+
+      // Filter, search, and sort logic
+      function filterAndRender() {
+        let filtered = [...allProducts];
+        const searchVal = document.getElementById("search").value.toLowerCase();
+        const categoryVal = document.getElementById("category").value;
+        const sortVal = document.getElementById("sort").value;
+
+        // Search by title
+        if (searchVal) {
+          filtered = filtered.filter((p) =>
+            p.title.toLowerCase().includes(searchVal)
+          );
+        }
+        // Filter by category
+        if (categoryVal) {
+          filtered = filtered.filter((p) => p.category === categoryVal);
+        }
+        // Sort by price
+        filtered.sort((a, b) =>
+          sortVal === "asc" ? a.price - b.price : b.price - a.price
+        );
+
+        renderProducts(filtered);
+      }
+
+      // Event listeners
+      document
+        .getElementById("search")
+        .addEventListener("input", filterAndRender);
+      document
+        .getElementById("category")
+        .addEventListener("change", filterAndRender);
+      document
+        .getElementById("sort")
+        .addEventListener("change", filterAndRender);
+
+      // Initial load
+      fetchCategories();
+      fetchProducts();
+    </script>
+  </body>
+</html>

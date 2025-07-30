@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase CRUD App (Vanilla JS)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 30px;
+      }
+      form,
+      .user-list {
+        margin-bottom: 30px;
+      }
+      input {
+        margin: 5px;
+      }
+      .user-card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+      button {
+        margin: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Firebase CRUD App</h2>
+    <form id="userForm">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <button type="submit">Add User</button>
+    </form>
+    <div id="userList" class="user-list"></div>
+    <div id="error" style="color: red"></div>
+
+    <script>
+      // Replace with your Firebase Realtime DB URL (no trailing slash)
+      const FIREBASE_URL =
+        "https://console.firebase.google.com/u/0/project/testdata-2c62d/database/testdata-2c62d-default-rtdb/data/~2F";
+
+      // Create (Add user)
+      document
+        .getElementById("userForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          if (!name || !email) return;
+          try {
+            await fetch(FIREBASE_URL + ".json", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, email }),
+            });
+            document.getElementById("userForm").reset();
+            fetchUsers();
+          } catch (err) {
+            document.getElementById("error").textContent =
+              "Failed to add user.";
+          }
+        });
+
+      // Read (Fetch all users)
+      async function fetchUsers() {
+        document.getElementById("error").textContent = "";
+        try {
+          const res = await fetch(FIREBASE_URL + ".json");
+          const data = await res.json();
+          renderUsers(data);
+        } catch (err) {
+          document.getElementById("error").textContent =
+            "Failed to fetch users.";
+        }
+      }
+
+      // Update (Edit user)
+      async function updateUser(id, name, email) {
+        try {
+          await fetch(`${FIREBASE_URL}/${id}.json`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email }),
+          });
+          fetchUsers();
+        } catch (err) {
+          document.getElementById("error").textContent =
+            "Failed to update user.";
+        }
+      }
+
+      // Delete (Remove user)
+      async function deleteUser(id) {
+        try {
+          await fetch(`${FIREBASE_URL}/${id}.json`, { method: "DELETE" });
+          fetchUsers();
+        } catch (err) {
+          document.getElementById("error").textContent =
+            "Failed to delete user.";
+        }
+      }
+
+      // Render users
+      function renderUsers(data) {
+        const userList = document.getElementById("userList");
+        userList.innerHTML = "";
+        if (!data) {
+          userList.innerHTML = "<p>No users found.</p>";
+          return;
+        }
+        Object.entries(data).forEach(([id, user]) => {
+          const card = document.createElement("div");
+          card.className = "user-card";
+          card.innerHTML = `
+          <strong>Name:</strong> <span id="name-${id}">${user.name}</span><br>
+          <strong>Email:</strong> <span id="email-${id}">${user.email}</span><br>
+          <button onclick="editUser('${id}', '${user.name}', '${user.email}')">Edit</button>
+          <button onclick="deleteUser('${id}')">Delete</button>
+        `;
+          userList.appendChild(card);
+        });
+      }
+
+      // Edit user (show prompt)
+      window.editUser = function (id, oldName, oldEmail) {
+        const name = prompt("Edit name:", oldName);
+        if (name === null) return;
+        const email = prompt("Edit email:", oldEmail);
+        if (email === null) return;
+        updateUser(id, name, email);
+      };
+
+      // Expose deleteUser for inline button
+      window.deleteUser = deleteUser;
+
+      // Initial fetch
+      fetchUsers();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MockAPI CRUD App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 30px;
+      }
+      form,
+      .student-list {
+        margin-bottom: 30px;
+      }
+      input,
+      select {
+        margin: 5px;
+      }
+      .student-card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+      button {
+        margin: 2px;
+      }
+      .error {
+        color: red;
+      }
+      .loading {
+        color: blue;
+      }
+      .flex {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Student CRUD App (MockAPI)</h2>
+    <form id="studentForm">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="number" id="age" placeholder="Age" required min="1" />
+      <input type="text" id="course" placeholder="Course" required />
+      <button type="submit">Add Student</button>
+    </form>
+    <div id="loading" class="loading"></div>
+    <div id="error" class="error"></div>
+    <div id="studentList" class="student-list flex"></div>
+
+    <script>
+      // Replace with your MockAPI endpoint, e.g. https://yourproject.mockapi.io/students
+      const API_URL = "https://64b7f7a721b9aa6eb078e9b7.mockapi.io/students";
+
+      // Show loading
+      function setLoading(isLoading) {
+        document.getElementById("loading").textContent = isLoading
+          ? "Loading..."
+          : "";
+      }
+
+      // Show error
+      function setError(msg) {
+        document.getElementById("error").textContent = msg || "";
+      }
+
+      // Create (Add student)
+      document
+        .getElementById("studentForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value.trim();
+          const age = document.getElementById("age").value.trim();
+          const course = document.getElementById("course").value.trim();
+          if (!name || !age || !course || isNaN(age) || Number(age) < 1) {
+            setError("Please enter valid name, age, and course.");
+            return;
+          }
+          setError("");
+          setLoading(true);
+          try {
+            await fetch(API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, age, course }),
+            });
+            document.getElementById("studentForm").reset();
+            fetchStudents();
+          } catch (err) {
+            setError("Failed to add student.");
+          }
+          setLoading(false);
+        });
+
+      // Read (Fetch all students)
+      async function fetchStudents() {
+        setLoading(true);
+        setError("");
+        try {
+          const res = await fetch(API_URL);
+          const data = await res.json();
+          renderStudents(data);
+        } catch (err) {
+          setError("Failed to fetch students.");
+        }
+        setLoading(false);
+      }
+
+      // Update (Edit student)
+      async function updateStudent(id, name, age, course) {
+        setLoading(true);
+        try {
+          await fetch(`${API_URL}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, age, course }),
+          });
+          fetchStudents();
+        } catch (err) {
+          setError("Failed to update student.");
+        }
+        setLoading(false);
+      }
+
+      // Delete (Remove student)
+      async function deleteStudent(id) {
+        setLoading(true);
+        try {
+          await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+          fetchStudents();
+        } catch (err) {
+          setError("Failed to delete student.");
+        }
+        setLoading(false);
+      }
+
+      // Render students
+      function renderStudents(data) {
+        const studentList = document.getElementById("studentList");
+        studentList.innerHTML = "";
+        if (!data || data.length === 0) {
+          studentList.innerHTML = "<p>No students found.</p>";
+          return;
+        }
+        data.forEach((student) => {
+          const card = document.createElement("div");
+          card.className = "student-card";
+          card.innerHTML = `
+          <strong>Name:</strong> <span id="name-${student.id}">${student.name}</span><br>
+          <strong>Age:</strong> <span id="age-${student.id}">${student.age}</span><br>
+          <strong>Course:</strong> <span id="course-${student.id}">${student.course}</span><br>
+          <button onclick="editStudent('${student.id}', '${student.name}', '${student.age}', '${student.course}')">Edit</button>
+          <button onclick="deleteStudent('${student.id}')">Delete</button>
+        `;
+          studentList.appendChild(card);
+        });
+      }
+
+      // Edit student (show prompt)
+      window.editStudent = function (id, oldName, oldAge, oldCourse) {
+        const name = prompt("Edit name:", oldName);
+        if (name === null) return;
+        const age = prompt("Edit age:", oldAge);
+        if (age === null || isNaN(age) || Number(age) < 1) return;
+        const course = prompt("Edit course:", oldCourse);
+        if (course === null) return;
+        updateStudent(id, name, age, course);
+      };
+
+      // Expose deleteStudent for inline button
+      window.deleteStudent = deleteStudent;
+
+      // Initial fetch
+      fetchStudents();
+    </script>
+  </body>
+</html>
