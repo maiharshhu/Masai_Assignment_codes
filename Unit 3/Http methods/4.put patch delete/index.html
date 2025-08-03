@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Task Manager</title>
+    <style>
+      .task-card {
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+      }
+      .editform {
+        display: none;
+        margin-top: 10px;
+      }
+      .btn {
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>All Tasks</h2>
+    <div id="taskList"></div>
+
+    <div id="editForm" style="display: none">
+      <input type="text" id="editTitle" placeholder="Title" />
+      <select id="editStatus">
+        <option value="pending">Pending</option>
+        <option value="completed">Completed</option>
+      </select>
+      <button id="saveBtn">Save</button>
+      <button id="cancelBtn">Cancel</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive CSS Complete Guide</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        margin-top: 2rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4a5568;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #2d3748;
+        margin: 2rem 0 1rem 0;
+        padding: 0.5rem 0;
+        border-bottom: 3px solid #667eea;
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        color: #4a5568;
+        margin: 1.5rem 0 0.5rem 0;
+        font-size: 1.3rem;
+      }
+
+      .code-block {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        overflow-x: auto;
+        border-left: 4px solid #667eea;
+      }
+
+      .example-container {
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        margin: 1rem 0;
+        overflow: hidden;
+      }
+
+      .example-title {
+        background: #667eea;
+        color: white;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+      }
+
+      .example-content {
+        padding: 1rem;
+      }
+
+      /* Display Types Examples */
+      .display-examples {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .display-box {
+        border: 2px solid #667eea;
+        padding: 1rem;
+        border-radius: 8px;
+        background: #f7fafc;
+      }
+
+      .block-example {
+        display: block;
+        background: #fed7d7;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        border-radius: 4px;
+      }
+
+      .inline-example {
+        display: inline;
+        background: #c6f6d5;
+        padding: 0.5rem;
+        margin: 0.5rem;
+        border-radius: 4px;
+      }
+
+      .inline-block-example {
+        display: inline-block;
+        background: #bee3f8;
+        padding: 0.5rem;
+        margin: 0.5rem;
+        width: 100px;
+        text-align: center;
+        border-radius: 4px;
+      }
+
+      /* Flexbox Examples */
+      .flex-container {
+        display: flex;
+        background: #edf2f7;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        gap: 1rem;
+      }
+
+      .flex-item {
+        background: #667eea;
+        color: white;
+        padding: 1rem;
+        border-radius: 4px;
+        text-align: center;
+        flex: 1;
+      }
+
+      .flex-wrap {
+        flex-wrap: wrap;
+      }
+
+      .flex-column {
+        flex-direction: column;
+      }
+
+      /* Grid Examples */
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        background: #edf2f7;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+      }
+
+      .grid-item {
+        background: #764ba2;
+        color: white;
+        padding: 1rem;
+        border-radius: 4px;
+        text-align: center;
+      }
+
+      /* Unit Examples */
+      .units-demo {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .unit-box {
+        border: 2px solid #667eea;
+        padding: 1rem;
+        border-radius: 8px;
+        background: #f7fafc;
+      }
+
+      .rem-example {
+        font-size: 1.5rem;
+        background: #fed7d7;
+        padding: 1rem;
+        border-radius: 4px;
+      }
+
+      .em-example {
+        font-size: 1.5em;
+        background: #c6f6d5;
+        padding: 1rem;
+        border-radius: 4px;
+      }
+
+      .px-example {
+        font-size: 24px;
+        background: #bee3f8;
+        padding: 1rem;
+        border-radius: 4px;
+      }
+
+      .percent-example {
+        width: 50%;
+        background: #fbb6ce;
+        padding: 1rem;
+        border-radius: 4px;
+      }
+
+      .vw-example {
+        width: 30vw;
+        background: #d6f5d6;
+        padding: 1rem;
+        border-radius: 4px;
+      }
+
+      /* Media Query Examples */
+      .responsive-box {
+        background: #667eea;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        border-radius: 8px;
+        margin: 1rem 0;
+        font-size: 1.2rem;
+      }
+
+      /* Mobile First Media Queries */
+      @media (max-width: 768px) {
+        .container {
+          margin: 1rem;
+          padding: 1rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .display-examples {
+          grid-template-columns: 1fr;
+        }
+
+        .flex-container {
+          flex-direction: column;
+        }
+
+        .responsive-box {
+          background: #e53e3e;
+          padding: 1rem;
+          font-size: 1rem;
+        }
+
+        .responsive-box::before {
+          content: "📱 Mobile View: ";
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .responsive-box {
+          background: #38a169;
+        }
+
+        .responsive-box::before {
+          content: "📱 Tablet View: ";
+        }
+      }
+
+      @media (min-width: 1025px) {
+        .responsive-box::before {
+          content: "💻 Desktop View: ";
+        }
+      }
+
+      /* Important Properties Demo */
+      .important-demo {
+        background: #fed7d7;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+      }
+
+      .important-text {
+        color: blue;
+        font-size: 16px;
+      }
+
+      .important-override {
+        color: red !important;
+        font-size: 20px !important;
+      }
+
+      /* Responsive Typography */
+      .responsive-text {
+        font-size: clamp(1rem, 2.5vw, 2rem);
+        background: #edf2f7;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        text-align: center;
+      }
+
+      /* Responsive Images */
+      .responsive-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+        margin: 1rem auto;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        width: 300px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      .tip-box {
+        background: #e6fffa;
+        border: 2px solid #38b2ac;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        position: relative;
+      }
+
+      .tip-box::before {
+        content: "💡 Pro Tip:";
+        font-weight: bold;
+        color: #38b2ac;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎨 Complete Responsive CSS Guide</h1>
+
+      <h2>1. Display Properties</h2>
+
+      <h3>Block vs Inline vs Inline-Block</h3>
+      <div class="example-container">
+        <div class="example-title">Live Examples</div>
+        <div class="example-content">
+          <div class="display-examples">
+            <div class="display-box">
+              <h4>Block Elements</h4>
+              <div class="block-example">Block 1 - Full width</div>
+              <div class="block-example">Block 2 - New line</div>
+              <div class="block-example">Block 3 - Stacked</div>
+            </div>
+
+            <div class="display-box">
+              <h4>Inline Elements</h4>
+              <span class="inline-example">Inline 1</span>
+              <span class="inline-example">Inline 2</span>
+              <span class="inline-example">Inline 3</span>
+              <p>Same line mein aate hain</p>
+            </div>
+
+            <div class="display-box">
+              <h4>Inline-Block Elements</h4>
+              <div class="inline-block-example">Box 1</div>
+              <div class="inline-block-example">Box 2</div>
+              <div class="inline-block-example">Box 3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        /* Block Elements */ .block-element { display: block; /* Full width leta
+        hai */ width: 100%; /* Width/height set kar sakte */ margin: 10px 0; /*
+        Margins work karte hain */ } /* Inline Elements */ .inline-element {
+        display: inline; /* Same line mein aate hain */ /* Width/height set nahi
+        kar sakte */ padding: 0 10px; /* Horizontal padding only */ } /*
+        Inline-Block Elements */ .inline-block-element { display: inline-block;
+        /* Best of both worlds */ width: 100px; /* Width/height set kar sakte */
+        height: 50px; /* Inline flow maintain karte hain */ }
+      </div>
+
+      <h2>2. Flexbox Layout</h2>
+
+      <div class="example-container">
+        <div class="example-title">Flexbox Examples</div>
+        <div class="example-content">
+          <h4>Basic Flex (Row)</h4>
+          <div class="flex-container">
+            <div class="flex-item">Item 1</div>
+            <div class="flex-item">Item 2</div>
+            <div class="flex-item">Item 3</div>
+          </div>
+
+          <h4>Flex Column</h4>
+          <div class="flex-container flex-column">
+            <div class="flex-item">Item 1</div>
+            <div class="flex-item">Item 2</div>
+            <div class="flex-item">Item 3</div>
+          </div>
+
+          <h4>Flex Wrap</h4>
+          <div class="flex-container flex-wrap">
+            <div class="flex-item" style="min-width: 200px">Wide Item 1</div>
+            <div class="flex-item" style="min-width: 200px">Wide Item 2</div>
+            <div class="flex-item" style="min-width: 200px">Wide Item 3</div>
+            <div class="flex-item" style="min-width: 200px">Wide Item 4</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        /* Flexbox Container */ .flex-container { display: flex; flex-direction:
+        row; /* row, column, row-reverse, column-reverse */ flex-wrap: wrap; /*
+        nowrap, wrap, wrap-reverse */ justify-content: center; /* flex-start,
+        flex-end, center, space-between, space-around */ align-items: center; /*
+        flex-start, flex-end, center, stretch, baseline */ gap: 1rem; /* Space
+        between items */ } /* Flexbox Items */ .flex-item { flex: 1; /*
+        flex-grow: 1, flex-shrink: 1, flex-basis: 0% */ flex-basis: 200px; /*
+        Initial size */ flex-grow: 1; /* Grow factor */ flex-shrink: 0; /*
+        Shrink factor */ }
+      </div>
+
+      <h2>3. CSS Grid Layout</h2>
+
+      <div class="example-container">
+        <div class="example-title">Grid Examples</div>
+        <div class="example-content">
+          <h4>Auto-fit Grid</h4>
+          <div class="grid-container">
+            <div class="grid-item">Grid 1</div>
+            <div class="grid-item">Grid 2</div>
+            <div class="grid-item">Grid 3</div>
+            <div class="grid-item">Grid 4</div>
+            <div class="grid-item">Grid 5</div>
+            <div class="grid-item">Grid 6</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        /* CSS Grid Container */ .grid-container { display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-rows: auto; gap: 1rem; /* Row aur column gap */
+        grid-auto-flow: row; /* row, column, dense */ } /* Grid Item Placement
+        */ .grid-item { grid-column: span 2; /* 2 columns span kare */ grid-row:
+        span 1; /* 1 row span kare */ } /* Specific Grid Areas */
+        .grid-container { grid-template-areas: "header header header" "sidebar
+        main main" "footer footer footer"; } .header { grid-area: header; }
+        .sidebar { grid-area: sidebar; } .main { grid-area: main; } .footer {
+        grid-area: footer; }
+      </div>
+
+      <h2>4. CSS Units (rem, em, px, %, vw, vh)</h2>
+
+      <div class="example-container">
+        <div class="example-title">Unit Comparison</div>
+        <div class="example-content">
+          <div class="units-demo">
+            <div class="unit-box">
+              <h4>REM Unit</h4>
+              <div class="rem-example">1.5rem text</div>
+              <p>Root element ke relative</p>
+            </div>
+
+            <div class="unit-box">
+              <h4>EM Unit</h4>
+              <div class="em-example">1.5em text</div>
+              <p>Parent element ke relative</p>
+            </div>
+
+            <div class="unit-box">
+              <h4>PX Unit</h4>
+              <div class="px-example">24px text</div>
+              <p>Fixed pixel size</p>
+            </div>
+
+            <div class="unit-box">
+              <h4>Percentage</h4>
+              <div class="percent-example">50% width</div>
+              <p>Parent ke relative</p>
+            </div>
+
+            <div class="unit-box">
+              <h4>VW Unit</h4>
+              <div class="vw-example">30vw width</div>
+              <p>Viewport width ka 30%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        /* CSS Units Explained */ /* Absolute Units */ px /* Pixels - Fixed size
+        */ pt /* Points - Print ke liye */ cm /* Centimeters */ /* Relative
+        Units */ rem /* Root element (html) ke font-size ke relative */ em /*
+        Parent element ke font-size ke relative */ % /* Parent element ke size
+        ke relative */ /* Viewport Units */ vw /* Viewport width ka percentage
+        (1vw = 1% of viewport width) */ vh /* Viewport height ka percentage (1vh
+        = 1% of viewport height) */ vmin /* vw aur vh mein se jo chota ho */
+        vmax /* vw aur vh mein se jo bada ho */ /* Examples */ .responsive-text
+        { font-size: clamp(1rem, 2.5vw, 3rem); /* Min, Preferred, Max */ }
+      </div>
+
+      <h2>5. !important Declaration</h2>
+
+      <div class="example-container">
+        <div class="example-title">!important Demo</div>
+        <div class="example-content">
+          <div class="important-demo">
+            <p class="important-text">Normal CSS styling (blue, 16px)</p>
+            <p class="important-text important-override">
+              !important styling (red, 20px)
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        /* !important Usage */ /* Normal CSS */ .text { color: blue; font-size:
+        16px; } /* !important Override */ .text { color: red !important; /* Blue
+        ko override kar dega */ font-size: 20px !important; /* 16px ko override
+        kar dega */ } /* Specificity Order (Low to High) */ /* 1. Element
+        selectors (p, div, span) */ /* 2. Class selectors (.class-name) */ /* 3.
+        ID selectors (#id-name) */ /* 4. Inline styles (style="...") */ /* 5.
+        !important (highest priority) */ /* Best Practice: Avoid !important, use
+        specific selectors instead */
+      </div>
+
+      <h2>6. Media Queries</h2>
+
+      <div class="example-container">
+        <div class="example-title">Responsive Breakpoints</div>
+        <div class="example-content">
+          <div class="responsive-box">Screen size change karo aur dekho!</div>
+
+          <div class="responsive-text">
+            Yeh text responsive hai - screen size ke saath change hota hai
+          </div>
+
+          <div class="responsive-img">Responsive Image/Element</div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        /* Mobile First Approach (Recommended) */ /* Base styles for mobile */
+        .container { width: 100%; padding: 1rem; } /* Tablet styles */ @media
+        (min-width: 768px) { .container { max-width: 750px; padding: 2rem; } }
+        /* Desktop styles */ @media (min-width: 1024px) { .container {
+        max-width: 1200px; padding: 3rem; } } /* Common Breakpoints */ /* Extra
+        small devices (phones, 600px and down) */ @media only screen and
+        (max-width: 600px) { } /* Small devices (portrait tablets and large
+        phones, 600px and up) */ @media only screen and (min-width: 600px) { }
+        /* Medium devices (landscape tablets, 768px and up) */ @media only
+        screen and (min-width: 768px) { } /* Large devices (laptops/desktops,
+        992px and up) */ @media only screen and (min-width: 992px) { } /* Extra
+        large devices (large laptops and desktops, 1200px and up) */ @media only
+        screen and (min-width: 1200px) { } /* Advanced Media Queries */ @media
+        (max-width: 768px) and (orientation: portrait) { } @media
+        (prefers-color-scheme: dark) { } @media (hover: hover) { }
+      </div>
+
+      <h2>7. Essential Responsive Properties</h2>
+
+      <div class="code-block">
+        /* Box Model */ * { box-sizing: border-box; /* Padding/border ko width
+        mein include kare */ } /* Responsive Images */ img { max-width: 100%; /*
+        Container se bada nahi hoga */ height: auto; /* Aspect ratio maintain
+        kare */ } /* Responsive Typography */ html { font-size: 16px; /* Root
+        font size */ } .responsive-heading { font-size: clamp(1.5rem, 4vw,
+        3rem); /* Fluid typography */ } /* Container Queries (New!) */
+        @container (min-width: 400px) { .card { display: grid;
+        grid-template-columns: 1fr 2fr; } } /* Flexbox for Equal Height */
+        .equal-height-container { display: flex; flex-wrap: wrap; }
+        .equal-height-item { flex: 1 1 300px; /* Grow, shrink, basis */ } /*
+        Grid for Complex Layouts */ .responsive-grid { display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;
+        }
+      </div>
+
+      <div class="tip-box">
+        <strong>Responsive Design Best Practices:</strong><br />
+        1. <strong>Mobile First:</strong> Chhote screen ke liye design karo,
+        phir bade screen ke liye enhance karo<br />
+        2. <strong>Flexible Units:</strong> rem, %, vw/vh use karo instead of
+        fixed px<br />
+        3. <strong>Flexible Images:</strong> max-width: 100% aur height: auto
+        always use karo<br />
+        4. <strong>Touch Targets:</strong> Mobile pe buttons kam se kam 44px ke
+        hone chahiye<br />
+        5. <strong>Performance:</strong> CSS minify karo aur unnecessary rules
+        avoid karo<br />
+        6. <strong>Testing:</strong> Different devices pe test karo ya browser
+        dev tools use karo
+      </div>
+
+      <h2>8. Modern CSS Features</h2>
+
+      <div class="code-block">
+        /* CSS Custom Properties (Variables) */ :root { --primary-color:
+        #667eea; --secondary-color: #764ba2; --container-padding: clamp(1rem,
+        5vw, 3rem); } .element { color: var(--primary-color); padding:
+        var(--container-padding); } /* CSS Functions */ .modern-layout { width:
+        min(90%, 1200px); /* Minimum value */ height: max(50vh, 400px); /*
+        Maximum value */ font-size: clamp(1rem, 2.5vw, 2rem); /* Min, preferred,
+        max */ margin: calc(100vh - 80px); /* Mathematical calculations */ } /*
+        Aspect Ratio */ .video-container { aspect-ratio: 16 / 9; /* Maintain
+        aspect ratio */ } /* CSS Subgrid */ .parent-grid { display: grid;
+        grid-template-columns: repeat(3, 1fr); } .child-grid { display: grid;
+        grid-template-columns: subgrid; /* Parent ke grid inherit kare */ }
+      </div>
+
+      <div class="tip-box">
+        <strong>Quick Responsive Checklist:</strong><br />
+        ✅ Viewport meta tag add kiya?<br />
+        ✅ box-sizing: border-box use kiya?<br />
+        ✅ Flexible units (rem, %, vw) use kiye?<br />
+        ✅ Media queries add kiye?<br />
+        ✅ Images responsive banaye?<br />
+        ✅ Touch-friendly navigation banaya?<br />
+        ✅ Different screen sizes pe test kiya?
+      </div>
+    </div>
+  </body>
+</html>
