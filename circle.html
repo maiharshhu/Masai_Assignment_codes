@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        div{
-            background: green;
-            height: 100px;
-            width: 100px;
-            border: black 5px;
-        }
-        div:hover{
-            border-radius: 50%;
-            background-color: orange;
-        }
+      div {
+        background: green;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        border: black 5px;
+      }
+      div:hover {
+        border-radius: 50%;
+        background-color: rgb(173, 70, 44);
+      }
     </style>
-</head>
-<body>
-    <div>
-
+  </head>
+  <body>
+    <div id="container">
+      <h3>this is div</h3>
     </div>
-</body>
+  </body>
 </html>
+<script>
+  let s = document.querySelector("h3");
+  s.innerText = "you changed the div";
+</script>

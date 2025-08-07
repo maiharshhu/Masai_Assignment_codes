@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library 📚</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h3>Library Management System</h3>
+
+    <h3>Add New Book</h3>
+    <form action="" id="bookform">
+      <input type="text" id="title" placeholder="Title..." required />
+      <input type="text" placeholder="Author..." required />
+      <input type="text" placeholder="Genre" required />
+      <input type="number" placeholder="Published Year" required />
+
+      <select id="bookAvail">
+        <option value="True">Available</option>
+        <option value="False">Unavaliable</option>
+      </select>
+      <button type="submit">Add Book</button>
+    </form>
+
+    <h3>All Available Books</h3>
+    <div id="booksList"></div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
