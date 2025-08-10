@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttling Exa</title>
+  </head>
+  <body>
+    <div class="container">
+      <img src="" alt="Random img" id="slide-img" />
+      <p id="slide-num"></p>
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </body>
+</html>
+<script>
+  let images = [];
+  let currindex = 0;
+
+  async function loadImages(count = 5) {
+    images = [];
+    for (let i = 0; i < count; i++) {
+      images.push(`https://picsum.photos/200/300?random=${Math.random()}`);
+    }
+    showImg(0);
+  }
+
+  function showImg(index) {
+    const img = document.getElementById("slide-img");
+    img.src = images[index];
+    document.getElementById("slide-num").innerText = `Slide ${index + 1} of ${
+      images.length
+    }`;
+  }
+
+  let lastClickTime = 0;
+
+  function throttleChange(direction) {
+    let now = Date.now();
+
+    if (now - lastClickTime < 1000) {
+      clickCount++;
+      if (clickCount > 3) {
+        alert("Chill chill, loading it!!");
+      }
+      return;
+    }
+
+    lastClickTime = now;
+    clickCount = 1;
+    if (direction === "next") {
+      currentIndex = (currentIndex + 1) % images.length;
+    } else {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+    }
+    showImage(currentIndex);
+  }
+
+  let clickCount = 0;
+
+  document
+    .getElementById("nextBtn")
+    .addEventListener("click", () => throttleChange("next"));
+  document
+    .getElementById("prevBtn")
+    .addEventListener("click", () => throttleChange("prev"));
+
+  loadImages();
+</script>
