@@ -1,77 +1,57 @@
-// function calculateDiscount() {
-//     let price = prompt("Enter the price:");
+function runProgram(input) {
+    const expr = input.trim();
+    let result = '';
+    let stack = [];
 
-//     if (isNaN(price) || price < 0) {
-//         console.log("Invalid price. Please enter a positive number.");
-//         return;
-//     }
-//     let discount = prompt("Enter the discount percentage:");
-//     if (isNaN(discount) || discount < 0) {
-//         console.log("Invalid discount. Please enter a positive number.");
-//         return;
-//     }
-//     else if (discount === "" || discount === 0) {
-//         discount = 10; // Default discount
-//     }
-//     else {
-//         discount = parseFloat(discount);
-//     }
-
-//     let discountAmount = (price * discount) / 100;
-//     let finalPrice = price - discountAmount;
-//     console.log("Final price after discount: " + finalPrice);
-// }
-// calculateDiscount();
-
-let a = "L";
-let b = "L";
-
-let alen = a.length
-let blen = b.length
-
-let aType = a[alen-1]
-let bType = b[blen-1]
-
-if(aType !==bType){
-    if(aType==="S"){
-        console.log("<")
+    // Operator precedence
+    function precedence(op) {
+        if (op === '^') return 3;
+        if (op === '*' || op === '/') return 2;
+        if (op === '+' || op === '-') return 1;
+        return 0;
     }
-    else if(aType==="M"){
-        if(bType==="S"){
-            console.log(">")
+
+    // Associativity // Only ^ is right
+    function rightAssociative(op) {
+        return op === '^';
+    }
+
+    for (let i = 0; i < expr.length; i++) {
+        const ch = expr[i];
+        if (/[a-zA-Z]/.test(ch)) {
+            // Operand => directly to output
+            result += ch;
+        } else if (ch === '(') {
+            stack.push(ch);
+        } else if (ch === ')') {
+            // Pop till '(' is found
+            while (stack.length && stack[stack.length - 1] !== '(') {
+                result += stack.pop();
+            }
+            stack.pop(); // pop '('
+        } else if ('+-*/^'.includes(ch)) { // operator
+            while (
+                stack.length &&
+                stack[stack.length - 1] !== '(' &&
+                (
+                    precedence(stack[stack.length - 1]) > precedence(ch) ||
+                    (
+                        precedence(stack[stack.length - 1]) === precedence(ch) &&
+                        !rightAssociative(ch)
+                    )
+                )
+            ) {
+                result += stack.pop();
+            }
+            stack.push(ch);
         }
-        else{
-            console.log("<")
-        }
     }
-    else if(aType==="L"){
-        console.log(">")
+    // Pop bache hue operators
+    while (stack.length) {
+        result += stack.pop();
     }
+    console.log(result);
 }
-else{
-    if(aType==="M"){
-        console.log("=")
-    }
-    else if(aType ==="S"){
-        if(alen>blen){
-            console.log("<")
-        }
-        else if(alen<blen){
-            console.log(">")
-        }
-        else{
-            console.log("=")
-        }
-    }
-    else if(aType ==="L"){
-        if(alen>blen){
-            console.log(">")
-        }
-        else if(alen<blen){
-            console.log("<")
-        }
-        else{
-            console.log("=")
-        }
-    }
-}
+
+// Example Test (for your sample input)
+runProgram("a+b-c+d*(e-f)/g+(h*(i/j))"); // Output: ab-c+def-*g/+hij/*+
