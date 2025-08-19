@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlavourFind😋</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/tscss.css" />
+  </head>
+  <body>
+    <!-- authenticaton section -->
+    <div id="tsparticles"></div>
+
+    <form id="auth-form">
+      <h3 id="form-title">Login</h3>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        required
+      />
+
+      <button type="submit" id="submit-btn">Log In</button>
+
+      <p id="toggle-text">
+        Don't have an account? <a href="#" id="toggle-link">Sign Up</a>
+      </p>
+    </form>
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"></script>
+  </body>
+</html>
