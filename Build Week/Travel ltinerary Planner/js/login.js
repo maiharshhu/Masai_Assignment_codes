@@ -1,14 +1,10 @@
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
-
-signUpButton.addEventListener('click', () => {
-    container.classList.add("right-panel-active");
-});
-
-signInButton.addEventListener('click', () => {
-    container.classList.remove("right-panel-active");
-});
+import { auth } from "../firebase-config.js";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
+    sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 // Array of background image URLs
 const backgrounds = [
@@ -32,3 +28,94 @@ changeBackground();
 
 // Repeat every 5 seconds
 setInterval(changeBackground, 3000);
+
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+const forgotPasswordLink = document.getElementById("forgotPassword");
+
+
+signUpButton.addEventListener('click', () => {
+    container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+    container.classList.remove("right-panel-active");
+});
+
+
+// This code is for signupform information getting form from end and capture here
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.querySelector('input[type="text"]').value.trim();
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const password = form.querySelector('input[type="password"]').value;
+
+    if (!name || !email || !password) {
+        alert('Please fill all fields');
+        return;
+    }
+
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        // update display name
+        await updateProfile(userCredential.user, { displayName: name });
+        alert('Account created! Please Sign In.');
+        // Optionally switch to Sign In form
+        showSignInForm();
+        form.reset();
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+// Login form 
+// This code is for signupform information getting form from end and capture here
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const password = form.querySelector('input[type="password"]').value;
+
+    if (!email || !password) {
+        alert('Please fill all fields');
+        return;
+    }
+
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert('Login successful!');
+        // Redirect user to dashboard or main page
+        window.location.href = "pages/dashboard.html";
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+
+//  forgot password code logic
+
+forgotPasswordLink.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const emailInput = document.querySelector(".sign-in-container form input[type='email']");
+    const email = emailInput.value.trim();
+
+    if (!email) {
+        alert("Please Enter Your Email Address To Reset Password");
+        emailInput.focus();
+        return;
+    }
+
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert(`Password reset email sent to ${email} Please check your inbox.`)
+    } catch (error) {
+        alert("Error while sending reset Email:" + error.message);
+    }
+});
+
+
+
+
+
