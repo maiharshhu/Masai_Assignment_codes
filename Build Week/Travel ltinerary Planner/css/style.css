@@ -5,7 +5,10 @@
 }
 
 body {
-  background: #f6f5f7;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background 1s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +57,6 @@ button {
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
-  cursor: pointer;
 }
 
 button:active {
@@ -197,7 +199,6 @@ input {
 
 .overlay-left {
   transform: translateX(-20%);
-  left: 0;
 }
 
 .container.right-panel-active .overlay-left {
@@ -251,38 +252,4 @@ footer i {
 footer a {
   color: #3c97bf;
   text-decoration: none;
-}
-
-/* Responsive styles for smaller screens */
-@media (max-width: 600px) {
-  .container {
-    width: 100%;
-    min-height: auto;
-    height: auto;
-  }
-
-  /* .sign-in-container, */
-  .sign-up-container,
-  .overlay-container {
-    position: relative;
-    width: 100%;
-    height: auto;
-    opacity: 1 !important;
-    transform: none !important;
-    z-index: 5 !important;
-  }
-
-  .overlay-container {
-    display: none;
-  }
-
-  form {
-    padding: 20px;
-  }
-
-  button {
-    width: 100%;
-    padding: 15px 0;
-    font-size: 16px;
-  }
 }
