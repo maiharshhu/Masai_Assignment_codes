@@ -3,116 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Button Click Rate Limiting</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-      .example-section {
-        margin-bottom: 30px;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-      }
-      .counter {
-        background: #f0f0f0;
-        padding: 10px;
-        border-radius: 4px;
-        margin: 10px 0;
-      }
-      button {
-        padding: 10px 20px;
-        margin: 5px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        background: #007bff;
-        color: white;
-      }
-      .progress-bar {
-        width: 100%;
-        height: 20px;
-        background: #e0e0e0;
-        border-radius: 10px;
-        overflow: hidden;
-        margin: 10px 0;
-      }
-      .progress-fill {
-        height: 100%;
-        background: #4caf50;
-        width: 0%;
-        transition: width 0.3s ease;
-      }
-    </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="example-section">
-      <h2>3. Button Click Rate Limiting</h2>
-      <p>Click rapidly to see throttling limit the execution rate.</p>
-
-      <button id="clickBtn" type="button">Click Me Rapidly!</button>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
+    <div class="container" id="container">
+      <div class="form-container sign-up-container">
+        <form action="#">
+          <h1>Create Account</h1>
+          <!-- <div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div> -->
+          <span>or use your email for registration</span>
+          <input type="text" placeholder="Name" />
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Password" />
+          <button>Sign Up</button>
+        </form>
       </div>
-      <div class="counter" id="clickCounter">Executed clicks: 0</div>
-      <div id="clickResults">Progress: 0%</div>
+      <div class="form-container sign-in-container">
+        <form action="#">
+          <h1>Sign in</h1>
+          <!-- <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+          </div> -->
+          <span>or use your account</span>
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Password" />
+          <a href="#">Forgot your password?</a>
+          <button>Sign In</button>
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1>Welcome Back!</h1>
+            <p>
+              To keep connected with us please login with your personal info
+            </p>
+            <button class="ghost" id="signIn">Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1>Hello, Friend!</h1>
+            <p>Enter your personal details and start journey with us</p>
+            <button class="ghost" id="signUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script>
-      // State
-      let clickCounter = 0;
-      let progress = 0;
-
-      // Optional: throttle to limit handler execution rate
-      // Adjust 'limitMs' to control how often handleClick can run.
-      function throttle(fn, limitMs) {
-        let last = 0;
-        return function (...args) {
-          const now = Date.now();
-          if (now - last >= limitMs) {
-            last = now;
-            fn.apply(this, args);
-          }
-        };
-      }
-
-      function handleClick() {
-        clickCounter++;
-        progress = Math.min(progress + 10, 100);
-
-        document.getElementById(
-          "clickCounter"
-        ).textContent = `Executed clicks: ${clickCounter}`;
-        document.getElementById(
-          "clickResults"
-        ).textContent = `Progress: ${progress}%`;
-        document.getElementById("progressFill").style.width = `${progress}%`;
-
-        if (progress >= 100) {
-          document.getElementById("clickResults").textContent = "Complete! 🎉";
-          // Briefly disable the button while resetting to avoid extra clicks
-          const btn = document.getElementById("clickBtn");
-          btn.disabled = true;
-          setTimeout(() => {
-            progress = 0;
-            document.getElementById("progressFill").style.width = "0%";
-            document.getElementById("clickResults").textContent =
-              "Progress: 0%";
-            btn.disabled = false;
-          }, 10000);
-        }
-      }
-
-      // Attach listener after DOM is ready
-      document.addEventListener("DOMContentLoaded", () => {
-        const btn = document.getElementById("clickBtn");
-        // Use throttled handler to demonstrate "rate limiting"
-        const throttledClick = throttle(handleClick, 300); // runs at most once every 300ms
-        btn.addEventListener("click", throttledClick);
-      });
-    </script>
+    <footer>
+      <p>
+        Created with <i class="fa fa-heart"></i> by
+        <a target="_blank" href="https://florin-pop.com">Florin Pop</a>
+        - Read how I created this and how you can join the challenge
+        <a
+          target="_blank"
+          href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/"
+          >here</a
+        >.
+      </p>
+    </footer>
+    <script src="login.js"></script>
   </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Glassmorphism Login Form | Travel Planner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <form id="loginForm" novalidate>
+        <h2>Login</h2>
+        <div class="input-field">
+          <input type="email" id="email" required />
+          <label for="email">Enter your email</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="password" required />
+          <label for="password">Enter your password</label>
+        </div>
+        <div class="forget">
+          <label for="remember">
+            <input type="checkbox" id="remember" />
+            <p>Remember me</p>
+          </label>
+          <a href="#">Forgot password?</a>
+        </div>
+        <button type="submit">Log In</button>
+        <div id="statusMessage" style="color: #fff; margin-top: 12px"></div>
+        <div class="register">
+          <p>Don't have an account? <a href="signup.html">Register</a></p>
+        </div>
+      </form>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
