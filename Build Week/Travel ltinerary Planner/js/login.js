@@ -87,7 +87,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         await signInWithEmailAndPassword(auth, email, password);
         alert('Login successful!');
         // Redirect user to dashboard or main page
-        window.location.href = "pages/dashboard.html";
+        window.location.href = "./dashboard.html";
     } catch (error) {
         alert(error.message);
     }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="header"></h1>
+    <p>This is para1</p>
+    <p>This is para2</p>
+    <p>This is para3</p>
+    <div class="container">
+      <p>This is para4 inside div</p>
+    </div>
+  </body>
+</html>
+<script>
+  let head = document.querySelector("#header");
+  head.innerHTML = "Welcome to Dom World!";
+
+  let ptag = document.querySelectorAll("p");
+  for (let i = 0; i < ptag.length; i++) {
+    ptag[i].style.color = "blue";
+  }
+
+  let box = document.querySelector(".container");
+  box.style.backgroundColor = "yellow";
+</script>

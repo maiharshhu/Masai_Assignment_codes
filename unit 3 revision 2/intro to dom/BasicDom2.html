@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul></ul>
+    <button onclick="addItem()">Add Item</button>
+  </body>
+</html>
+<script>
+  function addItem() {
+    let list = document.querySelector("ul");
+    const listItem = list.children;
+    const newIndex = listItem.length;
+    let newItem = document.createElement("li");
+    newItem.textContent = "New item";
+    if (newIndex % 2 === 0) {
+      newItem.style.color = "red";
+      newItem.style.fontStyle = "italic";
+    } else {
+      newItem.style.color = "blue";
+      newItem.style.fontWeight = "bold";
+    }
+    list.appendChild(newItem);
+  }
+</script>
