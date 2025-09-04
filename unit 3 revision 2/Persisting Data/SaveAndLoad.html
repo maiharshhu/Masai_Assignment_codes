@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Save and Load</title>
+    <style>
+      button {
+        margin: 1px;
+        padding: 5px 10px;
+        border-radius: 20px;
+      }
+      button:nth-of-type(2) {
+        background-color: rgb(245, 125, 125);
+      }
+    </style>
+  </head>
+  <body onload="loadNotes()">
+    <div>
+      <label for="note">Enter Notes</label>
+      <textarea name="name" id="note"></textarea>
+      <button type="button" onclick="saveNotes()">Save note</button>
+      <button type="button" onclick="loadNotes()">Load Notes</button>
+      <button type="button" onclick="deleteNotes()">Delete Notes</button>
+      <hr />
+    </div>
+    <div id="disp"></div>
+  </body>
+</html>
+<script>
+  let k = 1;
+  let ipNote = document.getElementById("note");
+  function saveNotes() {
+    if (ipNote.value) {
+      localStorage.setItem(`${k}`, ipNote.value);
+      k += 1;
+    } else {
+      alert("Please Enter Some Value to store");
+      return;
+    }
+    ipNote.value = "";
+  }
+
+  function loadNotes() {
+    let dispNt = document.getElementById("disp");
+    let newParagraph = document.createElement("p");
+    for (let i = 1; i <= localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = localStorage.getItem(key);
+      newParagraph.textContent = `key:${key},value:${value}`;
+      dispNt.appendChild(newParagraph);
+    }
+  }
+
+  function deleteNotes() {
+    alert("Deleted All Saved Data Successfully");
+    let savedata = localStorage.clear();
+  }
+</script>
