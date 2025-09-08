@@ -6,16 +6,21 @@
     <title>ToDo</title>
   </head>
   <body>
-    <label for="task">Task:</label>
-    <input type="text" id="task" />
+    <label for="addTask">Task:</label>
+    <input type="text" id="addTask" />
 
-    <button id="Addtsk" onclick="AddTask()" type="button">Add Task</button>
+    <button id="addBtn" onclick="AddTask()" type="button">Add Task</button>
 
-    <ul id="tsklst"></ul>
+    <ul id="display"></ul>
   </body>
 </html>
 <script>
-  let inpbox = document.getElementById("task");
-  let inp = inpbox.value.trim();
-  function AddTask() {}
+  // const inpBox = document.getElementById("addTask"); //or we can use query selector;
+  const inpBox = document.querySelector("input");
+  let inputTask = inpBox.value;
+
+  function AddTask() {
+    console.log("hello");
+    console.log(inputTask);
+  }
 </script>
