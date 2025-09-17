@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <input type="text" id="searchInput" placeholder="Enter " />
     <script src="main.js"></script>
   </body>
 </html>
+<script>
+  document
+    .getElementById("searchInput")
+    .addEventListener("input", function (event) {
+      searchMovie(event.target.value);
+    });
+
+  function searchMovie(query) {
+    console.log("Making api request for :", query);
+  }
+</script>

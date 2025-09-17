@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>Sign Up Form</h3>
+    <form id="signUpform" action="#">
+      <label for="emailInput">Email</label>
+      <input type="email" id="emailInput" />
+      <label for="PassInput">password</label>
+      <input type="password" id="PassInput" />
+      <input type="submit" value="SignUp" />
+    </form>
+  </body>
+</html>
+
+<script>
+  document.getElementById("signUpform").addEventListener("submit", signup);
+
+  function signup() {
+    event.preventDefault();
+    let email = document.getElementById("emailInput").value;
+    let pass = document.getElementById("PassInput").value;
+    const API_KEY = "AIzaSyDqkrl3HkiLIGlUUB2EWOfIakuRK85wqVY";
+
+    const payload = JSON.stringify({
+      email: email,
+      password: pass,
+    });
+
+    const requestOption = {
+      method: "POST",
+      body: payload,
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
+      requestOption
+    )
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+  }
+</script>
