@@ -1,24 +1,62 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, push, remove, onValue, serverTimestamp } from "firebase/database";
-import { firebaseConfig } from "./firebase-config";
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const saveQuotesRef = ref(database, 'saveQuotes')
-
-// all dom elements
 const quotesContainer = document.getElementById('quotes-container');
-const savedQuotesContainer = document.getElementById('saved-quotes-container');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
-const tagButtons = document.querySelectorAll('.tag-btn');
-const sortByDropdown = document.getElementById('sort-by');
+const tagButtons = document.querySelectorAll('.filter-btn');
 
 let currentPage = 1;
-let currentTag = localStorage.getItem('lasttag') || "";
+let currentTag = "";
 
-
-async function fetchQuotes(page = 1, tags = "") {
-    const url = ""
-
+async function fetchQuotes(page) {
+    const url = `http://api.quotable.io/quotes?page=${page}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        renderQuotes(data.results);
+        updateButtons(data);
+    } catch (error) {
+        quotesContainer.innerHTML = '<p>Failed to load quotes. Please try again.</p>';
+    }
 }
+
+
+function renderQuotes(quotes) {
+    quotesContainer.innerHTML = '';
+    quotes.forEach(quote => {
+        const card = document.createElement('div');
+        card.innerHTML = `
+            <p>"${quote.content}"</p>
+            <p><strong>- ${quote.author}</strong></p>
+        `;
+        quotesContainer.appendChild(card);
+    });
+}
+
+
+function updateButtons(data) {
+    prevBtn.disabled = data.page <= 1;
+    nextBtn.disabled = data.page >= data.totalPages;
+}
+
+
+nextBtn.addEventListener('click', () => {
+    currentPage++;
+    fetchQuotes(currentPage);
+});
+
+prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        fetchQuotes(currentPage);
+    }
+});
+
+tagButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        currentTag = button.dataset.tag;
+        currentPage = 1;
+        fetchQuotes(currentPage, currentTag)
+    })
+    tagButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+})
+fetchQuotes(currentPage);
