@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Quotekeep</h1>
+    </div>
+
+    <div class="main">
+        <div class="controls">
+            <div id="filter-tags" class="filter-group">
+                <button class="tag-btn" data-tag="technology">Technology</button>
+                <button class="tag-btn" data-tag="wisdom">Wisdom</button>
+                <button class="tag-btn" data-tag="life">Life</button>
+                <button class="tag-btn" data-tag="success">Success</button>
+                <button class="tag-btn" data-tag="">All Quotes</button>
+            </div>
+            <div id="pagination-ctrl" class="pagination-grp">
+                <button id="prev-btn">Prev&gt;</button>
+                <button id="next-btn">&lt;Next</button>
+            </div>
+            <div id="quote-feed-sec">
+                <h2>Live Section</h2>
+                <div id="quotes-container" class="quote-grid"></div>
+            </div>
+
+            <div id="saved-quotes-sec">
+                <div class="saved-quotes-header">
+                    <h2>Saved Quotes</h2>
+                    <div id="sort-ctrl">
+                        <label for="sort-by">Sort By:</label>
+                        <select id="sort-by">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="saved-quotes-container" class="quote-grid"></div>
+            </div>
+        </div>
+        <script type="module" src="./script.js"></script>
+</body>
+
+</html>
