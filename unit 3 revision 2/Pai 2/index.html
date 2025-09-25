@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>welcome🙏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="auth-section">
+        <h2>Sign In/ Sign Up</h2>
+        <form id="auth-form">
+            <input type="email" id="email" placeholder="Email" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <button type="submit">submit</button>
+            <p id="auth-error" style="color: red;"></p>
+        </form>
+        <button id="switch-to-signup">Switch to sign up</button>
+    </div>
+
+    <div id="app-section">
+        <button id="logout-btn">Logout</button>
+        <div>
+            <h2>Search Repositories</h2>
+            <input type="text" id="search-input" placeholder="Search for Github Repos...">
+            <ul id="repo-list"></ul>
+        </div>
+        <div>
+            <h2>Stashed Repositories</h2>
+            <ul id="stashed-repos"></ul>
+        </div>
+    </div>
+</body>
+<script type="module" src="script.js"></script>
+
+</html>
