@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Using dom manipluation</h1>
+    <div>
+        <label for="box">add text to modify</label>
+        <input type="text" id="box">
+        <button type="button" onclick="changeText()">Modify</button>
+    </div>
+</body>
+
+</html>
+<script>
+    let search = document.getElementById("box")
+    let ui = document.querySelector("h1");
+    function changeText() {
+        if (ui.innerText === "") {
+            ui.innerText = "Hello Please add something in box";
+            ui.style.backgroundColor = "red";
+        }
+        else {
+            ui.style = "none";
+            ui.innerText = search.value;
+        }
+    }
+</script>

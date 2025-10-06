@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic list</title>
+    <title>React Example</title>
+    <!-- React core library -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- React DOM library for rendering to the DOM -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel for JSX transformation (if writing JSX directly in HTML) -->
+    <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+</body>
+
+</html>
+<script type="text/babel">
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    let items = ["React", "JavaScript", "CSS", "Html"];
+
+
+    // console.log(s)
+    function App() {
+        return (
+            <>
+                <h1>Todo list</h1>
+                <ul>
+                    {items.map((ele, index) => (
+                        <li key={index}>{ele}</li>
+                    ))}
+                </ul>
+            </>
+        );
+    }
+    root.render(<App />)
+</script>
