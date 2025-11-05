@@ -1,0 +1,109 @@
+:root {
+  --bg: #0b1020;
+  --card: #131a31;
+  --text: #eef2ff;
+  --muted: #a8b3cf;
+  --accent: #6ea8fe;
+  --danger: #ff6b6b;
+  --ring: #6ea8fe55;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  background: radial-gradient(
+      1200px 500px at 20% -10%,
+      #1a2246 0,
+      transparent 60%
+    ),
+    radial-gradient(1000px 600px at 120% -20%, #1a2246 0, transparent 60%),
+    var(--bg);
+  color: var(--text);
+}
+
+.app {
+  max-width: 760px;
+  margin: 48px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 2rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid #252d4d;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 30px #00000055;
+}
+
+.field {
+  margin-bottom: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid #2b355e;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #0e1430;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.error {
+  margin: 4px 0 0;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+button.primary {
+  background: linear-gradient(135deg, #7aa2ff, #6ea8fe);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: #0c1228;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.primary:hover {
+  filter: brightness(1.05);
+}
+
+.confirmation {
+  margin-top: 20px;
+  background: #0f1535;
+  border: 1px solid #24305a;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+pre {
+  background: #0c1230;
+  padding: 12px;
+  border-radius: 10px;
+  overflow: auto;
+}
