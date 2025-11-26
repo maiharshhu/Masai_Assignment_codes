@@ -1,0 +1,37 @@
+:root {
+  --text: #0f1720;
+  --nav-bg: #edf2f7;
+  --sidebar-bg: #f7fafc;
+  --card-bg: #f1f5f9;
+  --footer-bg: #e2e8f0;
+  --body-bg: #ffffff;
+}
+
+/* dark theme variables */
+.theme-dark {
+  --text: #e6eef8;
+  --nav-bg: #1f2937;
+  --sidebar-bg: #111827;
+  --card-bg: #0b1220;
+  --footer-bg: #0b1220;
+  --body-bg: #0b1220;
+}
+
+/* light theme variables */
+.theme-light {
+  --text: #0f1720;
+  --nav-bg: #edf2f7;
+  --sidebar-bg: #f7fafc;
+  --card-bg: #f1f5f9;
+  --footer-bg: #e2e8f0;
+  --body-bg: #ffffff;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: var(--body-bg);
+  transition: background 200ms ease, color 200ms ease;
+}
