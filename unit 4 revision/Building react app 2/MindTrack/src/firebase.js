@@ -5,12 +5,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCdbXf19MTcf57xDjo-9lgA-eps6HYr8vQ",
-    authDomain: "mindtrack-4b902.firebaseapp.com",
-    projectId: "mindtrack-4b902",
-    storageBucket: "mindtrack-4b902.firebasestorage.app",
-    messagingSenderId: "609707351332",
-    appId: "1:609707351332:web:68772f66b873d8a75e27b1"
+
 };
 
 // Initialize Firebase
