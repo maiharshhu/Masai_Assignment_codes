@@ -5,6 +5,7 @@
     "@emotion/styled": "^11.14.1",
     "@reduxjs/toolkit": "^2.9.2",
     "dotenv": "^17.2.1",
+    "express-rate-limit": "^8.2.1",
     "firebase": "^12.2.1",
     "framer-motion": "^12.23.24",
     "react": "^19.2.0",
